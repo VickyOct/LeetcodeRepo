@@ -1,0 +1,24 @@
+public class Solution {
+    public int MaximumWealth(int[][] accounts) {
+        int m = accounts.Length;
+        if(m < 1)
+            return 0;
+        int maxSum = 0;
+
+        for(int i = 0; i < m; i++){
+            int n = accounts[i].Length;
+            int sum = 0;
+            for(int j = 0; j < n; j++)
+            {
+                if(n <= 50 && 1 <= accounts[i][j] && accounts[i][j] <= 100)
+                {
+                    sum += accounts[i][j];
+                }
+            }
+            if(sum > maxSum){
+                maxSum = sum;
+            }
+        }
+        return maxSum;
+    }
+}
