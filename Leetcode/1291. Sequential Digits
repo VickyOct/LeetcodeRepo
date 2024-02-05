@@ -1,0 +1,18 @@
+public class Solution {
+    public IList<int> SequentialDigits(int low, int high) {
+        List<int> result = new List<int>();
+        string digits = "123456789";
+        int numberMin = low.ToString().Length;
+        int numberMax = high.ToString().Length;
+
+        for(int i = numberMin; i <= numberMax; i++){
+            for(int j = 0; j < 10-i; j++){
+                string numString = digits.Substring(j, i);
+                int number = int.Parse(numString);
+                if(number <= high && number >= low)
+                    result.Add(number);
+            }
+        }
+        return result;
+    }
+}
