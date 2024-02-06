@@ -1,0 +1,22 @@
+public class Solution {
+    public string MinWindow(string s, string t) {
+        string Result = "";
+        if(t.Length >= s.Length)
+            return Result;
+        
+        int minLength = int.MaxValue;
+        for(int i = 0; i < s.Length; i++){
+            for(int j = i + 1; j <= s.Length; j++){
+                string stringToCheck = s.Substring(i, j - i);
+                bool containsAllChars = t.All(c => stringToCheck.Contains(c));
+
+                if(containsAllChars && minLength > j - i){
+                    Result = stringToCheck;
+                    minLength = j - i;
+                    break;
+                }
+            }   
+        }
+        return Result;
+    }
+}
