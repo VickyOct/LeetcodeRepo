@@ -1,0 +1,19 @@
+public class Solution {
+    public IList<IList<string>> GroupAnagrams(string[] strs) {
+        if(strs == null || strs.Length == 0){
+            return new List<IList<string>>();
+        }
+        Dictionary<string, List<string>> map = new Dictionary<string, List<string>>();
+        foreach(string s in strs){
+            char[] charsInString = s.ToCharArray();
+            Array.Sort(charsInString);
+            string keyString = new string(charsInString);
+
+            if(!map.ContainsKey(keyString))
+                map[keyString] = new List<string>();
+
+            map[keyString].Add(s);
+        }
+        return new List<IList<string>>(map.Values);
+    }
+}
