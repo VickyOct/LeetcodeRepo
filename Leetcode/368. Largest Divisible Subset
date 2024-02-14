@@ -1,0 +1,33 @@
+public class Solution {
+    public IList<int> LargestDivisibleSubset(int[] nums) {
+        int n = nums.Length;
+        if(n == 0 || nums == null)
+            return new List<int>();
+
+        int[] dp = new int[n];
+        int[] preIndex = new int[n];
+
+        int maxIndex = 0;
+        Array.Sort(nums);
+
+        for(int i = 0; i < nums.Length; i++){
+            dp[i] = 1;
+            preIndex[i] = -1;
+            for(int j = i - 1; j >= 0 ; j--){
+                if(nums[i] % nums[j] == 0 && dp[i] < dp[j] + 1){
+                    dp[i] = dp[j] + 1;
+                    preIndex[i] = j;
+                }
+            }
+            if(dp[i] > dp[maxIndex])
+                maxIndex = i;
+        }
+        List<int> result = new List<int>();
+        int currentIndex = maxIndex;
+        while(currentIndex != -1){
+            result.Add(nums[currentIndex]);
+            currentIndex = preIndex[currentIndex];
+        }
+        return result;
+    }
+}
