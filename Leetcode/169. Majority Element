@@ -1,0 +1,22 @@
+public class Solution {
+    public int MajorityElement(int[] nums) {
+        Dictionary<int, int> numsCount = new Dictionary<int, int>();
+        int maxNum = 0;
+        int maxCount = 0;
+
+        foreach(int num in nums){
+            if(numsCount.ContainsKey(num)){
+                numsCount[num]++;
+            }
+            else{
+                numsCount[num] = 1;                
+            }
+
+            if(numsCount[num] > maxCount){
+                maxCount = numsCount[num];
+                maxNum = num;
+            }
+        }
+            return maxNum;
+    }
+}
