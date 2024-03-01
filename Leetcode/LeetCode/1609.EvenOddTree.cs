@@ -25,9 +25,10 @@ public class Solution
         while(queue.Count > 0)
         {
             level++;
+            int size = queue.Count
             int preValue = 0;
 
-            for(int i = 0; i < queue.Count; i++)
+            for(int i = 0; i < size; i++)
             {
                 TreeNode curr = queue.Dequeue();
 
