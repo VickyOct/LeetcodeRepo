@@ -2,28 +2,32 @@
 {
     public int SubarraysWithKDistinct(int[] nums, int k)
     {
+        return AtMostKDistinct(nums, k) - AtMostKDistinct(nums, k - 1);
+    }
+    private int AtMostKDistinct(int[] nums, int k)
+    {
         int result = 0;
+        Dictionary<int, int> numsExit = new Dictionary<int, int>();
+        int left = 0;
 
-        for (int i = 0; i < nums.Length; i++)
+        for (int right = 0; right < nums.Length; right++)
         {
-            List<int> numsExit = new List<int>();
-
-            for (int pointer = i; pointer < nums.Length; pointer++)
+            if (!numsExit.ContainsKey(nums[right]))
             {
-                if (!numsExit.Contains(nums[pointer]))
-                {
-                    numsExit.Add(nums[pointer]);
-                    if (numsExit.Count > k)
-                        break;
-
-                    if (numsExit.Count == k)
-                        result++;
-                }
-                else if (numsExit.Contains(nums[pointer]) && numsExit.Count == k)
-                {
-                    result++;
-                }
+                numsExit[nums[right]] = 0;
             }
+            numsExit[nums[right]]++;
+
+            while (numsExit.Count > k)
+            {
+                numsExit[nums[left]]--;
+                if (numsExit[nums[left]] == 0)
+                {
+                    numsExit.Remove(nums[left]);
+                }
+                left++;
+            }
+            result += right - left + 1;
         }
         return result;
     }
