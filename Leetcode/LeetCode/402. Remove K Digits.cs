@@ -29,8 +29,6 @@
         while (st.Count > 0)
             sb.Insert(0, st.Pop());
 
-        sb.Replace("0", "").ToString();
-
         return sb.Length == 0? "0" : sb.ToString();
     }
 }
